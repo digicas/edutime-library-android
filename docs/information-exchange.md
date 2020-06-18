@@ -10,17 +10,17 @@ In order to do that Edutime client library is to be bundled within the education
 
 ```
 +------------------------------------------+
-|              Kid's mobile                |     
-|                                          |     +---------+
-| +--------------+           +-----------+ |     | parents |
-| |   edu app    |           | EduKids   | |     | devices |
-| |              |           | launcher  |<----->|         |
-| |   +---(API)--+           |           | |     +---------+
-| |   |          |           |           | |     
-| |   | edutime  |           |           | |     +------------+
-| |   | client   |<--------->|           | |     | edu skills |
-| |   | library  |           |           |<----->| analytics  |
-| |   |          |           |           | |     |            |
+|              Kid's mobile                |     +---------+
+|                                          |     | parents |
+| +--------------+           +-----------+ |     | devices |
+| |   edu app    |           | EduKids   |<----->+---------+
+| |              |           | launcher  | |     +----------+
+| |   +---(SDK)--+           |           | |     | edu apps |
+| |   |          |           |           |<----->| registry |
+| |   | edutime  |           |           | |     +----------+
+| |   | client   |<--------->|           | |     +------------+
+| |   | library  |           |           |<----->| edu skills |
+| |   |          |           |           | |     | analytics  |
 | +---+----------+           +-----------+ |     +------------+
 +------------------------------------------+
 ```
@@ -38,19 +38,23 @@ The data exchange between the edutime library and EduKids launcher shall happen 
 Educational app can communicate with the edutime library anytime (via defined API), but can receive up to 15 seconds old information.
 Provided information is cached and send to the EduKids launcher on the next sync iteration.
 
-- [ ] // TODO frequency yet to be discussed
+- [x] // TODO frequency yet to be discussed
+ --> conclusion: communication between the client library and EduKids launcher will happen instantly, i.e. without caching in SDK
 
 Note: The general idea of the implementation of the edutime library is similar to Google Play Game Services (https://developers.google.com/games/services/android/quickstart).
 
 ## User related information exchange
 Both educational app and EduKids launcher can be run under the different user profiles. We need to assure the below described information is related to the proper user.
 
-#### [APICALL] Get the edutime user ID
+#### [SDKCALL] Get the edutime user ID
 Educational app gets the uuid of the EduKids launcher user, under which it can execute further described commands.
 
 note: This uuid shall be generated on the very frequent bases within the EduKids launcher in order to be privacy compliant. Therefore the uuid acts rather as the session id.
 
-- [ ] // TODO discuss the frequency or procedure of the user's uuid generation / usage
+- [x] // TODO discuss the frequency or procedure of the user's uuid generation / usage
+-->  conclusion: there will be stable launcher's user uuid generated for the particular edu app (based on edu apps SDKKEY)
+
+SDKKEY will be generated in the edu apps registry and can be used across several versions and platforms of the app
 
 
 ## Time related information exchange
@@ -60,25 +64,25 @@ Dealing with time and its valuation is the key aspect of the EduKids ecosystem -
 
 ### App own screentime related
 
-#### [APICALL] Time off warning
+#### [SDKCALL] Time off warning
 Educational app gets the time(date) when the EduKids launcher stops the app due to the switch of the mobile to the more strict time category. 
 
 This enables the educational app to warn its user in advance within its UI.  
 
-#### [APICALL] Time on info
+#### [SDKCALL] Time on info
 Assuming the educational app has the background process - it gets the time(date) when the EduKids launcher enables the app due to the switch of the mobile to the less strict time category. 
 
 This enables the educational app's background process to differentiate between the quiet and non quiet mode (e.g. for notifications, etc.).  
 
-#### [APICALL] Time category info
+#### [SDKCALL] ScreenTime category info
 Educational app gets the information on under which time category the app is listed by the parent. It also receives the list of categories and their status (un/locked).
 
 This enables to request the different / more relevant category if needed.
 
-#### [APICALL] Time category request
-Educational app can request to be listed under the different time category.
+#### [SDKCALL] ScreenTime category suggest
+Educational app can suggest to be listed under the different screentime category.
 
-This will be propagated to the parent of the user, who might act upon this request.
+This will be propagated to the parent of the user, who might act upon this suggestion.
 
 
 ### Influencing screentime of other apps
@@ -96,19 +100,20 @@ Timecoins can be further used for unlocking the time categories or spending on s
 
 The definition of under which conditions the app's edupoints are gained and their amount is fully up to the app developer. It can be related to the gained levels, stars, virtual money, etc.
 
-#### [APICALL] Timecoins info
+#### [SDKCALL] Timecoins info
 Educational app gets the info on current amount of timecoins the kid has available.
 
 This enables the educational app to show this amount in its UI.
 
-#### [APICALL] Report gained edupoints
+#### [SDKCALL] Report gained edupoints
 Educational app reports the amount of edupoints gained since the last successfull edupoints report call.
 
 Returns timepoints gained (as a deffered Promise / Future - deffered up to the sync time). 
 
 This enables the educational app to show currently gained **timecoins** in its UI as the reward.
 
-- [ ] // TODO clarify potential sync frequency issue
+- [x] // TODO clarify potential sync frequency issue
+--> conclusion: immediate callback -> no sync frequency issues
 
 
 ## Educational progresss related information exchange
@@ -125,10 +130,10 @@ Each educational application shall register its discipline (math / physics / lan
 
 Enumeration of skills and related (sub)categories and disciplines will be defined by EduKids project.
 
-- [ ] // TODO discuss versioning and propagation of changes of the skills / (sub)categories / disciplines enumeration
-
+- [x] // TODO discuss versioning and propagation of changes of the skills / (sub)categories / disciplines enumeration
+--> enumeration will be hard-bundled in the SDK version
  
-#### [APICALL] Report educational progress
+#### [SDKCALL] Report educational progress
 It is expected that the educational app reports every minute user's educational progress through edutime client library to EduKids launcher. The progress is further propagated to parents and teachers. EduKids platform can remap app reported skills for the parent's report. 
 
 Educational app reports JSON with: 
@@ -151,7 +156,7 @@ Task forms are freely defined by the educational app.
 - [ ] // TODO discuss certainty on gained skill - level within skill / skill; e.g. via task solution time aspect 
 
 
-#### [APICALL] Get the current level of user's educational skills
+#### [SDKCALL] Get the current level of user's educational skills
 Educational app receives the skills / (sub)categories / disciplines, which the user mastered. This is received only for registered disciplines. 
 
 This enables the educational app to let the user jump into more difficult tasks in order to avoid being bored by the initial low skill tasks.
@@ -166,5 +171,6 @@ EduKids launcher manages the (dis)enablement of launching the apps, therefore re
 
 ## Other topics to be discussed
 
-- [ ] versioning / deprecation of the edutime client library
+- [x] versioning / deprecation of the edutime client library
+--> launcher will be able to communicate with older - deprecated library versions
 
