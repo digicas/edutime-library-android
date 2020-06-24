@@ -1,0 +1,21 @@
+plugins {
+    id 'com.android.library'
+    id 'teanity'
+}
+
+teanity {
+    modules {
+        version = Lib.other.teanityModules
+        useComponent = true
+    }
+}
+
+dependencies {
+
+    implementation(project(":sdk-dispatcher"))
+
+    api(project(":sdk-model"))
+
+    implementation(Lib.android.startup)
+
+}

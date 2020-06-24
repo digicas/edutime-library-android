@@ -1,0 +1,17 @@
+plugins {
+    id 'com.android.library'
+    id 'teanity'
+}
+
+teanity {
+    modules {
+        version = Lib.other.teanityModules
+        useComponent = true
+    }
+}
+
+dependencies {
+
+    compileOnly(project(":sdk-model"))
+
+}

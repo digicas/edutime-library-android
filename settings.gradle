@@ -1,0 +1,5 @@
+include ':sdk-model'
+include ':sdk-dispatcher'
+include ':sdk'
+include ':app'
+rootProject.name = "edukids-sdk"

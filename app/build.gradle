@@ -1,0 +1,24 @@
+plugins {
+    id 'com.android.application'
+    id 'teanity'
+}
+
+teanity {
+    modules {
+        version = Lib.other.teanityModules
+        useCore = true
+        useUI = true
+    }
+}
+
+android {
+    defaultConfig {
+        applicationId "com.edukids.sdk.app"
+    }
+}
+
+dependencies {
+
+    implementation(project(":sdk"))
+
+}
