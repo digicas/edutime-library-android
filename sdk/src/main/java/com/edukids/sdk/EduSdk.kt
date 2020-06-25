@@ -2,6 +2,9 @@ package com.edukids.sdk
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
+import com.edukids.sdk.dispatcher.EduSdkResolver
+import com.edukids.sdk.internal.EduSdkInstanceImpl
 import java.lang.ref.WeakReference
 
 class EduSdk private constructor(
@@ -10,8 +13,17 @@ class EduSdk private constructor(
 
     private val context get() = _context.get()
 
+    @Throws(IllegalStateException::class)
     fun getNewInstance(intent: Intent): EduSdkInstance {
-        TODO()
+        val key = EduSdkResolver.find()
+            .inside(intent.extras ?: Bundle.EMPTY)
+            .resolveInstance()
+
+        check(key != null) {
+            "Cannot return a new instance without any key present. You weren't launched through the launcher."
+        }
+
+        return EduSdkInstanceImpl(key, this)
     }
 
     companion object {
