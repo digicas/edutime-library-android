@@ -23,10 +23,10 @@ object EduSdkResolver {
         MISSION_START(EduMissionStartParams::class.java, ""),
         MISSION_FINISH(EduMissionFinishParams::class.java, ""),
         MISSION_RESPONSE(EduMissionContract::class.java, ""),
-        MISSION_COMPLETE(TODO(), ""),
+        MISSION_COMPLETE(MissionComplete::class.java, ""),
         SCREEN_TIME_CATEGORY(ScreenTimeCategory::class.java, ""),
         SCREEN_TIME_CATEGORY_CONSTRAINTS(ScreenTimeCategoryConstraints::class.java, ""),
-        SCREEN_TIME_CATEGORY_SUGGEST(TODO(), ""),
+        SCREEN_TIME_CATEGORY_SUGGEST(ScreenTimeCategorySuggestion::class.java, ""),
         SKILL_LEVEL(SkillLevel::class.java, ""),
         TIME_CONSTRAINTS(TimeConstraints::class.java, "")
     }

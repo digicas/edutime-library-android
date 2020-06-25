@@ -70,3 +70,5 @@ interface EduMissionContract : Parcelable {
     val id: String
 
 }
+
+interface MissionComplete : Parcelable
