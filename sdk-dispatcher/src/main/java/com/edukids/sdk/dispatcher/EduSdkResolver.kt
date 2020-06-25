@@ -23,7 +23,7 @@ object EduSdkResolver {
         MISSION_START(EduMissionStartParams::class.java, "EGK0lNmIbY"),
         MISSION_FINISH(EduMissionFinishParams::class.java, "2I60mPK2na"),
         MISSION_RESPONSE(EduMissionContract::class.java, "KAgXdCW1Oh"),
-        MISSION_COMPLETE(MissionComplete::class.java, "TdgqDjXNlp"),
+        MISSION_COMPLETE(EduMissionComplete::class.java, "TdgqDjXNlp"),
         SCREEN_TIME_CATEGORY(ScreenTimeCategory::class.java, "V6EhS20PFr"),
         SCREEN_TIME_CATEGORY_CONSTRAINTS(ScreenTimeCategoryConstraints::class.java, "omgFF3OU4C"),
         SCREEN_TIME_CATEGORY_SUGGEST(ScreenTimeCategorySuggestion::class.java, "sst3V1gdfE"),

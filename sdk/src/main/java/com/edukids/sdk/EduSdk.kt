@@ -10,7 +10,7 @@ class EduSdk private constructor(
 
     private val context get() = _context.get()
 
-    fun getInstance(intent: Intent): EduSdkInstance {
+    fun getNewInstance(intent: Intent): EduSdkInstance {
         TODO()
     }
 
@@ -27,6 +27,11 @@ class EduSdk private constructor(
                 sdk = WeakReference(it)
             }
         }
+
+        @Throws(KotlinNullPointerException::class)
+        @JvmName("getInstance")
+        @JvmStatic
+        operator fun invoke() = sdk?.get()!!
 
     }
 
