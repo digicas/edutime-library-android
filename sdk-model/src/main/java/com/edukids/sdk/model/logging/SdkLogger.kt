@@ -30,6 +30,7 @@ interface SdkLogger {
         @JvmStatic
         fun level(level: Int) {
             logger = SdkLoggerImpl(level)
+            v("Logger has been set to level $level")
         }
 
     }

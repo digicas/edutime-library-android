@@ -28,7 +28,8 @@ object EduSdkResolver {
         SCREEN_TIME_CATEGORY_CONSTRAINTS(ScreenTimeCategoryConstraints::class.java, "omgFF3OU4C"),
         SCREEN_TIME_CATEGORY_SUGGEST(ScreenTimeCategorySuggestion::class.java, "sst3V1gdfE"),
         SKILL_LEVEL(SkillLevel::class.java, "iX7i2h9kB1"),
-        TIME_CONSTRAINTS(TimeConstraints::class.java, "QKJgXPaHVD")
+        TIME_CONSTRAINTS(TimeConstraints::class.java, "QKJgXPaHVD"),
+        TASK_ORDER(EduTaskOrder::class.java, "YZje0gOBJH")
     }
 
 
