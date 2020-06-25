@@ -46,6 +46,8 @@ subprojects {
             dexOptions {
                 preDexLibraries !System.getenv("ci")
             }
+
+            kotlinOptions.freeCompilerArgs += ["-Xinline-classes"]
         }
     }
 }

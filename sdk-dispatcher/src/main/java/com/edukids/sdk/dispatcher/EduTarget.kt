@@ -1,6 +1,7 @@
 package com.edukids.sdk.dispatcher
 
 import android.content.Intent
+import com.edukids.sdk.model.internal.InstanceKey
 
 class EduTarget private constructor(
     internal val action: String,
@@ -11,7 +12,9 @@ class EduTarget private constructor(
     internal fun toIntent() = Intent(action)
         .setClassName(packageName, targetClass)
 
-    class Builder {
+    class Builder(
+        private val instanceKey: InstanceKey? = null
+    ) {
 
         private lateinit var action: String
         private lateinit var packageName: String
@@ -29,11 +32,11 @@ class EduTarget private constructor(
             this.targetClass = targetClass
         }
 
-        fun toModel() = EduTarget(
+        fun createDispatcher() = EduTarget(
             action = action,
             packageName = packageName,
             targetClass = targetClass
-        ).let { EduSdkResolver.build(it) }
+        ).let { EduSdkResolver.build(it, instanceKey) }
 
     }
 

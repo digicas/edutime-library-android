@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
+import com.edukids.sdk.model.internal.InstanceKey
 import com.edukids.sdk.model.logging.SdkLogger
 import com.edukids.sdk.model.logging.e
 
@@ -20,16 +21,14 @@ abstract class EduSdkReceiver : BroadcastReceiver() {
     }
 
     private fun onReceive(context: Context, extras: Bundle) {
-        val parcelables = EduSdkResolver.find()
-            .inside(extras)
-            .resolve()
-        onReceive(context, parcelables)
+        val resolver = EduSdkResolver.find().inside(extras)
+        onReceive(context, resolver.resolve(), resolver.resolveInstance())
     }
 
-    open fun onReceive(context: Context, extras: List<Parcelable>) {
-        extras.forEach { onReceive(context, it) }
+    open fun onReceive(context: Context, extras: List<Parcelable>, instance: InstanceKey?) {
+        extras.forEach { onReceive(context, it, instance) }
     }
 
-    open fun onReceive(context: Context, extra: Parcelable) = Unit
+    open fun onReceive(context: Context, extra: Parcelable, instance: InstanceKey?) = Unit
 
 }
