@@ -21,8 +21,13 @@ interface SdkLogger {
             return logger
         }
 
+        @JvmStatic
         fun debug() = level(Log.DEBUG)
+
+        @JvmStatic
         fun release() = level(Log.ASSERT + 1)
+
+        @JvmStatic
         fun level(level: Int) {
             logger = SdkLoggerImpl(level)
         }
