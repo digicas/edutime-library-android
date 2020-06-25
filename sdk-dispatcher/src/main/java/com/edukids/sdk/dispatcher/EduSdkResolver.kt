@@ -66,8 +66,6 @@ class EduModelDispatcher internal constructor(
         intent.putExtra(parcelable.toKey(), parcelable)
     }
 
-    fun build() = intent
-
-    fun build(context: Context) = context.sendBroadcast(intent)
+    fun dispatch(context: Context) = context.sendBroadcast(intent)
 
 }
