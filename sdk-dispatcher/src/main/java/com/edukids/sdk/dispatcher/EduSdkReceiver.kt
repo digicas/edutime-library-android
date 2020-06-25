@@ -12,8 +12,6 @@ abstract class EduSdkReceiver : BroadcastReceiver() {
 
     abstract val action: String
 
-    abstract fun onReceive(context: Context, extras: List<Parcelable>)
-
     override fun onReceive(context: Context?, intent: Intent?) {
         when (intent?.action) {
             action -> onReceive(context ?: return, intent.extras ?: return)
@@ -27,5 +25,11 @@ abstract class EduSdkReceiver : BroadcastReceiver() {
             .resolve()
         onReceive(context, parcelables)
     }
+
+    open fun onReceive(context: Context, extras: List<Parcelable>) {
+        extras.forEach { onReceive(context, it) }
+    }
+
+    open fun onReceive(context: Context, extra: Parcelable) = Unit
 
 }
