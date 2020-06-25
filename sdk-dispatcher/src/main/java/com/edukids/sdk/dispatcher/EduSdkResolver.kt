@@ -52,7 +52,7 @@ class EduModelResolver internal constructor() {
         bundles.add(extras)
     }
 
-    fun build() = bundles.flatMap { it.toParcelables() }
+    fun resolve() = bundles.flatMap { it.toParcelables() }
 
 }
 

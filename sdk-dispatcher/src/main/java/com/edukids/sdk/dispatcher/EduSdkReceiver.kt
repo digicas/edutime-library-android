@@ -24,7 +24,7 @@ abstract class EduSdkReceiver : BroadcastReceiver() {
     private fun onReceive(context: Context, extras: Bundle) {
         val parcelables = EduSdkResolver.find()
             .inside(extras)
-            .build()
+            .resolve()
         onReceive(context, parcelables)
     }
 
