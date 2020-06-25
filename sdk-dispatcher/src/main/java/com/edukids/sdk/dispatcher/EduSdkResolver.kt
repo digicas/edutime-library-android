@@ -1,8 +1,10 @@
 package com.edukids.sdk.dispatcher
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
+import com.edukids.sdk.dispatcher.EduSdkResolver.apply
 import com.edukids.sdk.dispatcher.EduSdkResolver.toKey
 import com.edukids.sdk.dispatcher.EduSdkResolver.toParcelables
 import com.edukids.sdk.model.*
@@ -41,6 +43,8 @@ object EduSdkResolver {
 
     fun find() = EduModelResolver()
     fun dispatch(instanceKey: InstanceKey? = null) = EduTarget.Builder(instanceKey)
+
+    fun Intent.apply(instanceKey: InstanceKey?) = putExtra(KEY_INSTANCE, instanceKey)
 
 
     internal fun build(
@@ -82,8 +86,7 @@ class EduModelDispatcher internal constructor(
     instanceKey: InstanceKey? = null
 ) {
 
-    private val intent = target.toIntent()
-        .putExtra(EduSdkResolver.KEY_INSTANCE, instanceKey)
+    private val intent = target.toIntent().apply(instanceKey)
 
     fun put(parcelable: Parcelable) = apply {
         intent.putExtra(parcelable.toKey(), parcelable)
