@@ -2,6 +2,7 @@ package com.edukids.sdk
 
 import com.edukids.sdk.model.CurrencyStats
 import com.edukids.sdk.model.ScreenTimeCategoryConstraints
+import com.edukids.sdk.model.ScreenTimeCategorySuggestion
 import com.edukids.sdk.model.TimeConstraints
 import java.util.concurrent.Future
 
@@ -30,11 +31,6 @@ interface EduSdkInstance {
      * */
     suspend fun getCurrencyStats(): Result<CurrencyStats>
 
-    /**
-     * Tries to set current category to the provided one. It might however fail to do so under some
-     * circumstances (ie. Category is locked by child's parent, etc)
-     * */
-    suspend fun suggestCorrectCategory(categoryId: String): Result<ScreenTimeCategoryConstraints>
 
     /** @see [getTimeConstraints] */
     fun getTimeConstraintsAsync(): Future<TimeConstraints>
@@ -45,8 +41,12 @@ interface EduSdkInstance {
     /** @see [getCurrencyStats] */
     fun getCurrencyStatsAsync(): Future<CurrencyStats>
 
-    /** @see [suggestCorrectCategory] */
-    fun suggestCorrectCategoryAsync(categoryId: String): Future<ScreenTimeCategoryConstraints>
+
+    /**
+     * Tries to set current category to the provided one. It might however fail to do so under some
+     * circumstances (ie. Category is locked by child's parent, etc)
+     * */
+    fun suggestCorrectCategory(suggestion: ScreenTimeCategorySuggestion)
 
     /**
      * @return a mission interface for dispatching singular tasks to the app so user can be awarded
