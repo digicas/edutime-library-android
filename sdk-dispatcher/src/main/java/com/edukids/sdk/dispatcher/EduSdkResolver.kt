@@ -17,29 +17,29 @@ object EduSdkResolver {
 
     private enum class Key(
         val type: Class<out Parcelable>,
-        val value: String
+        val key: String
     ) {
-        CURRENCY_STATS(CurrencyStats::class.java, ""),
-        MISSION_START(EduMissionStartParams::class.java, ""),
-        MISSION_FINISH(EduMissionFinishParams::class.java, ""),
-        MISSION_RESPONSE(EduMissionContract::class.java, ""),
-        MISSION_COMPLETE(MissionComplete::class.java, ""),
-        SCREEN_TIME_CATEGORY(ScreenTimeCategory::class.java, ""),
-        SCREEN_TIME_CATEGORY_CONSTRAINTS(ScreenTimeCategoryConstraints::class.java, ""),
-        SCREEN_TIME_CATEGORY_SUGGEST(ScreenTimeCategorySuggestion::class.java, ""),
-        SKILL_LEVEL(SkillLevel::class.java, ""),
-        TIME_CONSTRAINTS(TimeConstraints::class.java, "")
+        CURRENCY_STATS(CurrencyStats::class.java, "T3QtvGWZR3"),
+        MISSION_START(EduMissionStartParams::class.java, "EGK0lNmIbY"),
+        MISSION_FINISH(EduMissionFinishParams::class.java, "2I60mPK2na"),
+        MISSION_RESPONSE(EduMissionContract::class.java, "KAgXdCW1Oh"),
+        MISSION_COMPLETE(MissionComplete::class.java, "TdgqDjXNlp"),
+        SCREEN_TIME_CATEGORY(ScreenTimeCategory::class.java, "V6EhS20PFr"),
+        SCREEN_TIME_CATEGORY_CONSTRAINTS(ScreenTimeCategoryConstraints::class.java, "omgFF3OU4C"),
+        SCREEN_TIME_CATEGORY_SUGGEST(ScreenTimeCategorySuggestion::class.java, "sst3V1gdfE"),
+        SKILL_LEVEL(SkillLevel::class.java, "iX7i2h9kB1"),
+        TIME_CONSTRAINTS(TimeConstraints::class.java, "QKJgXPaHVD")
     }
 
 
     internal fun Parcelable.toKey() = Key.values()
         .first { it.type == this::class.java }
-        .value
+        .key
 
     internal fun Bundle.toParcelables() = Key.values()
         .asSequence()
-        .filter { containsKey(it.value) }
-        .mapNotNull { getParcelable<Parcelable>(it.value) }
+        .filter { containsKey(it.key) }
+        .mapNotNull { getParcelable<Parcelable>(it.key) }
         .toList()
 
 }
