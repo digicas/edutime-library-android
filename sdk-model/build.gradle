@@ -1,4 +1,19 @@
 plugins {
     id 'com.android.library'
     id 'teanity'
+    id 'maven-publish'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                groupId = Publishing.groupId
+                artifactId = project.name
+                version = Publishing.version
+            }
+        }
+    }
 }
