@@ -8,7 +8,8 @@ object Lib {
 
     object V {
         const val kotlin = "1.3.72"
-        const val gradle = "4.0.0"
+        const val coroutines = "1.3.7"
+        const val gradle = "4.1.0-beta02"
 
         object AndroidX {
             const val recycler = "1.1.0"
@@ -25,8 +26,9 @@ object Lib {
     }
 
     object Kotlin {
-        val gradle = kotlin("gradle-plugin", V.kotlin)
-        val stdlib = kotlin("stdlib-jdk7", V.kotlin)
+        const val gradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:${V.kotlin}"
+        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${V.kotlin}"
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${V.coroutines}"
     }
 
     object Android {
@@ -46,8 +48,5 @@ object Lib {
         const val kotpref = "com.chibatching.kotpref:kotpref:${V.kotpref}"
         const val teagger = "com.skoumal:teagger:db7f71d6b3"
     }
-
-    private fun kotlin(module: String, version: String? = null) =
-        "org.jetbrains.kotlin:kotlin-$module${version?.let { ":$version" } ?: ""}"
 
 }

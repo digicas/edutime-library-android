@@ -27,6 +27,8 @@ afterEvaluate {
 
 dependencies {
 
+    api(Lib.kotlin.coroutines)
+
     compileOnly(project(":sdk-model"))
 
 }

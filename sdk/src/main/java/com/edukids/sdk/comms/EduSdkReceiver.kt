@@ -13,7 +13,7 @@ class SdkReceiver : EduSdkReceiver() {
 
     override val action = Constants.ACTION_RECEIVE_DATA
 
-    override fun onReceive(context: Context, extra: Parcelable, instance: InstanceKey?) {
+    override suspend fun onReceive(context: Context, extra: Parcelable, instance: InstanceKey?) {
         SdkLogger.d("<- SDK received a parcel $extra")
         // STOPSHIP: 25/06/2020 this sample code needs to be removed
         EduSdkResolver.dispatch()

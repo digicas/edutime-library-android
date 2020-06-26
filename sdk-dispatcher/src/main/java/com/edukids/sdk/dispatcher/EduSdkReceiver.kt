@@ -8,8 +8,11 @@ import android.os.Parcelable
 import com.edukids.sdk.model.internal.InstanceKey
 import com.edukids.sdk.model.logging.SdkLogger
 import com.edukids.sdk.model.logging.e
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 
-abstract class EduSdkReceiver : BroadcastReceiver() {
+abstract class EduSdkReceiver : BroadcastReceiver(), CoroutineScope by MainScope() {
 
     abstract val action: String
 
@@ -22,13 +25,13 @@ abstract class EduSdkReceiver : BroadcastReceiver() {
 
     private fun onReceive(context: Context, extras: Bundle) {
         val resolver = EduSdkResolver.find().inside(extras)
-        onReceive(context, resolver.resolve(), resolver.resolveInstance())
+        launch { onReceive(context, resolver.resolve(), resolver.resolveInstance()) }
     }
 
-    open fun onReceive(context: Context, extras: List<Parcelable>, instance: InstanceKey?) {
+    open suspend fun onReceive(context: Context, extras: List<Parcelable>, instance: InstanceKey?) {
         extras.forEach { onReceive(context, it, instance) }
     }
 
-    open fun onReceive(context: Context, extra: Parcelable, instance: InstanceKey?) = Unit
+    open suspend fun onReceive(context: Context, extra: Parcelable, instance: InstanceKey?) = Unit
 
 }
