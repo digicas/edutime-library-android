@@ -3,6 +3,7 @@ package com.edukids.sdk
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import com.edukids.sdk.comms.SuspendingWaitRegistry
 import com.edukids.sdk.dispatcher.EduSdkResolver
 import com.edukids.sdk.internal.EduSdkInstanceImpl
 import java.lang.ref.WeakReference
@@ -11,7 +12,9 @@ class EduSdk private constructor(
     private val _context: WeakReference<Context>
 ) {
 
-    private val context get() = _context.get()
+    internal val context get() = _context.get()
+
+    internal val waitRegistry = SuspendingWaitRegistry()
 
     @Throws(IllegalStateException::class)
     fun getNewInstance(intent: Intent): EduSdkInstance {

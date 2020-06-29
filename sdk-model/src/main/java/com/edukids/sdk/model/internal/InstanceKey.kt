@@ -4,6 +4,6 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-inline class InstanceKey(
+data class InstanceKey(
     val key: String
 ) : Parcelable
