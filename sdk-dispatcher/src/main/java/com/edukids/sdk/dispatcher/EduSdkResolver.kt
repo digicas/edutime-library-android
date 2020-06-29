@@ -15,6 +15,7 @@ object EduSdkResolver {
     internal const val KEY_INSTANCE = "NvgGKdcJtu"
 
     private const val KEY_CURRENCY_STATS = "T3QtvGWZR3"
+    private const val KEY_ERROR = "GM9dxyorpK"
     private const val KEY_MISSION_START = "EGK0lNmIbY"
     private const val KEY_MISSION_FINISH = "2I60mPK2na"
     private const val KEY_MISSION_CONTRACT = "KAgXdCW1Oh"
@@ -28,6 +29,7 @@ object EduSdkResolver {
 
     private val keys = mapOf(
         CurrencyStats::class.java to KEY_CURRENCY_STATS,
+        EduError::class.java to KEY_ERROR,
         EduMissionStartParams::class.java to KEY_MISSION_START,
         EduMissionFinishParams::class.java to KEY_MISSION_FINISH,
         EduMissionContract::class.java to KEY_MISSION_CONTRACT,

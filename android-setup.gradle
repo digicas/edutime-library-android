@@ -34,10 +34,6 @@ subprojects {
                 vectorDrawables.useSupportLibrary = true
             }
 
-            packagingOptions {
-                exclude "META-INF/*"
-            }
-
             lintOptions {
                 abortOnError true
                 fatal 'StopShip'
@@ -48,6 +44,14 @@ subprojects {
             }
 
             kotlinOptions.freeCompilerArgs += ["-Xinline-classes"]
+
+            buildTypes {
+                release {
+                    minifyEnabled false
+                    shrinkResources false
+                    proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+                }
+            }
         }
     }
 }
