@@ -9,7 +9,7 @@ import com.edukids.sdk.dispatcher.EduSdkResolver.apply
 import com.edukids.sdk.dispatcher.EduSdkResolver.toKey
 import com.edukids.sdk.dispatcher.EduSdkResolver.toParcelables
 import com.edukids.sdk.model.*
-import com.edukids.sdk.model.internal.Constants
+import com.edukids.sdk.model.internal.EduConstants
 import com.edukids.sdk.model.internal.InstanceKey
 
 object EduSdkResolver {
@@ -97,7 +97,8 @@ class EduModelDispatcher internal constructor(
         intent.putExtra(parcelable.toKey(), parcelable)
     }
 
-    @RequiresPermission(Constants.PERMISSION_ACCESS_DATA)
-    fun dispatch(context: Context) = context.sendBroadcast(intent, Constants.PERMISSION_ACCESS_DATA)
+    @RequiresPermission(EduConstants.Permission.ACCESS_DATA)
+    fun dispatch(context: Context) =
+        context.sendBroadcast(intent, EduConstants.Permission.ACCESS_DATA)
 
 }

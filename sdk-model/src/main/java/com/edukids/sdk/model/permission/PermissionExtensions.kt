@@ -9,11 +9,11 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
-import com.edukids.sdk.model.internal.Constants
+import com.edukids.sdk.model.internal.EduConstants
 
 @JvmName("hasPermission")
 fun Context.hasEduPermission() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-    checkSelfPermission(Constants.PERMISSION_ACCESS_DATA) == PackageManager.PERMISSION_GRANTED
+    checkSelfPermission(EduConstants.Permission.ACCESS_DATA) == PackageManager.PERMISSION_GRANTED
 } else {
     true
 }
@@ -22,13 +22,13 @@ fun Context.hasEduPermission() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODE
 inline fun ComponentActivity.requestEduPermission(crossinline onResult: (Boolean) -> Unit) {
     registerForActivityResult(ActivityResultContracts.RequestPermission()) {
         onResult(it == true)
-    }.launch(Constants.PERMISSION_ACCESS_DATA)
+    }.launch(EduConstants.Permission.ACCESS_DATA)
 }
 
 @JvmName("requestPermission")
 fun Activity.requestEduPermission() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        requestPermissions(arrayOf(Constants.PERMISSION_ACCESS_DATA), 10)
+        requestPermissions(arrayOf(EduConstants.Permission.ACCESS_DATA), 10)
     }
 }
 
