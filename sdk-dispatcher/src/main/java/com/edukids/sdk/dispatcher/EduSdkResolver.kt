@@ -55,7 +55,8 @@ object EduSdkResolver {
     ) = EduModelDispatcher(target, instanceKey)
 
 
-    internal fun Parcelable.toKey() = keys[this::class.java]
+    internal fun Parcelable.toKey() = this::class.java.toKey()
+    internal fun Class<out Parcelable>.toKey() = keys[this]
         ?: error("This parcelable ($this) cannot be resolved to any key. Check the definitions")
 
     internal fun Bundle.toParcelables() = keys.values

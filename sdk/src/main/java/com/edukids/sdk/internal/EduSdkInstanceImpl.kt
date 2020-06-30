@@ -24,7 +24,7 @@ internal class EduSdkInstanceImpl(
     override suspend fun getTimeConstraints(): Result<TimeConstraints> {
         scope.launch(dispatcher) {
             key.dispatch()
-                .put(EduTaskOrder.TIME_CONSTRAINTS)
+                .put(EduTaskOrder(TimeConstraints::class.java))
                 .dispatch(sdk.context!!)
         }
         return sdk.waitRegistry.runCatching { await<TimeConstraints>() }
@@ -33,7 +33,7 @@ internal class EduSdkInstanceImpl(
     override suspend fun getScreenTimeCategoryConstraints(): Result<ScreenTimeCategoryConstraints> {
         scope.launch(dispatcher) {
             key.dispatch()
-                .put(EduTaskOrder.SCREEN_TIME_CONSTRAINTS)
+                .put(EduTaskOrder(ScreenTimeCategoryConstraints::class.java))
                 .dispatch(sdk.context!!)
         }
         return sdk.waitRegistry.runCatching { await<ScreenTimeCategoryConstraints>() }
@@ -42,7 +42,7 @@ internal class EduSdkInstanceImpl(
     override suspend fun getCurrencyStats(): Result<CurrencyStats> {
         scope.launch(dispatcher) {
             key.dispatch()
-                .put(EduTaskOrder.CURRENCY_STATS)
+                .put(EduTaskOrder(CurrencyStats::class.java))
                 .dispatch(sdk.context!!)
         }
         return sdk.waitRegistry.runCatching { await<CurrencyStats>() }

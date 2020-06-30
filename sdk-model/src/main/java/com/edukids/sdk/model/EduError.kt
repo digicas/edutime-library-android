@@ -2,7 +2,6 @@ package com.edukids.sdk.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
-import java.io.IOException
 
 @Parcelize
 data class EduError(
@@ -11,8 +10,9 @@ data class EduError(
      * Does not provide information that should be displayed to the user, quite the contrary. Keep
      * these messages to developer builds only, implement [code] based maps with your own messages.
      * */
-    override val message: String
-) : IOException(), Parcelable {
+    override val message: String,
+    val target: Class<out Parcelable>
+) : RuntimeException(), Parcelable {
 
     companion object {
 

@@ -1,29 +1,46 @@
 package com.edukids.sdk.comms
 
 import android.os.Parcelable
+import com.edukids.sdk.model.EduError
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
-import kotlin.reflect.KClass
 
 @OptIn(ExperimentalCoroutinesApi::class)
 internal class SuspendingWaitRegistry {
 
-    private val contentRegistry = mutableMapOf<KClass<*>, Channel<Parcelable>>()
+    private val contentRegistry = mutableMapOf<Class<*>, Channel<Parcelable>>()
 
 
-    suspend inline fun <reified T : Parcelable> await() = await(T::class)
+    @Throws(EduError::class)
+    suspend inline fun <reified T : Parcelable> await() = await(T::class.java)
 
-    suspend fun <T : Parcelable> await(cls: KClass<T>): T {
-        return getChannel(cls).receive() as T
+    @Throws(EduError::class)
+    suspend fun <T : Parcelable> await(cls: Class<T>): T {
+        val channel = getChannel(cls)
+        val received = channel.receive()
+        try {
+            return when {
+                cls.isInstance(received) -> received as T
+                received is EduError -> throw received
+                else -> throw IllegalStateException("Received an object that was unexpected")
+            }
+        } finally {
+            channel.close()
+        }
     }
 
 
     fun push(element: Parcelable) {
-        getChannel(element::class).offer(element)
+        val targetClass = if (element is EduError) {
+            element.target
+        } else {
+            element::class.java
+        }
+        getChannel(targetClass).offer(element)
     }
 
 
-    private fun <T : Parcelable> getChannel(cls: KClass<T>) = contentRegistry.getOrPut(cls) {
+    private fun <T : Parcelable> getChannel(cls: Class<T>) = contentRegistry.getOrPut(cls) {
         Channel<Parcelable>(Channel.RENDEZVOUS).also {
             it.invokeOnClose {
                 contentRegistry.remove(cls)
