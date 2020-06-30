@@ -27,6 +27,8 @@ afterEvaluate {
 
 dependencies {
 
+    implementation(Lib.android.core)
+
     api(Lib.kotlin.coroutines)
 
     compileOnly(project(":sdk-model"))

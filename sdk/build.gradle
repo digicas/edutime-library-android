@@ -32,5 +32,6 @@ dependencies {
     api(project(":sdk-model"))
 
     implementation(Lib.android.startup)
+    implementation(Lib.android.core)
 
 }

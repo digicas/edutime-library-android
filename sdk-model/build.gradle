@@ -17,3 +17,11 @@ afterEvaluate {
         }
     }
 }
+
+dependencies {
+
+    implementation(Lib.android.core)
+
+    compileOnly(Lib.android.activity)
+
+}

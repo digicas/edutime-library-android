@@ -18,6 +18,8 @@ object Lib {
             const val navigation = "2.3.0-beta01"
             const val lifecycle = "2.3.0-alpha03"
             const val startup = "1.0.0-alpha01"
+            const val activity = "1.2.0-alpha06"
+            const val core = "1.5.0-alpha01"
         }
 
         const val twine = "0.1.+"
@@ -39,6 +41,8 @@ object Lib {
             "androidx.navigation:navigation-safe-args-gradle-plugin:${V.AndroidX.navigation}"
         const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:${V.AndroidX.lifecycle}"
         const val startup = "androidx.startup:startup-runtime:${V.AndroidX.startup}"
+        const val activity = "androidx.activity:activity:${V.AndroidX.activity}"
+        const val core = "androidx.core:core-ktx:${V.AndroidX.core}"
     }
 
     object Other {

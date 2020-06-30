@@ -2,6 +2,8 @@ package com.edukids.sdk.model.internal
 
 object Constants {
 
+    const val PERMISSION_ACCESS_DATA = "com.edukids.permission.ACCESS_DATA"
+
     const val CLASS_LAUNCHER_RECEIVER = "com.edukids.comms.SdkBroadcastReceiver"
     const val PACKAGE_LAUNCHER = "com.edukids.launcher"
 

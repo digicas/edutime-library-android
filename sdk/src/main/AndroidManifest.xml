@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.edukids.sdk">
 
+    <uses-permission android:name="com.edukids.permission.ACCESS_DATA" />
+
     <application tools:ignore="MissingAutoRevokeTolerance">
 
         <provider
@@ -20,7 +22,8 @@
         <receiver
             android:name=".comms.SdkReceiver"
             android:enabled="true"
-            android:exported="true"><!--STOPSHIP add a permission-->
+            android:exported="true"
+            android:permission="com.edukids.permission.ACCESS_DATA">
             <intent-filter>
                 <action android:name="com.edukids.sdk.ACTION_RECEIVE_DATA" />
             </intent-filter>

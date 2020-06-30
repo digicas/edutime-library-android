@@ -4,10 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
+import androidx.annotation.RequiresPermission
 import com.edukids.sdk.dispatcher.EduSdkResolver.apply
 import com.edukids.sdk.dispatcher.EduSdkResolver.toKey
 import com.edukids.sdk.dispatcher.EduSdkResolver.toParcelables
 import com.edukids.sdk.model.*
+import com.edukids.sdk.model.internal.Constants
 import com.edukids.sdk.model.internal.InstanceKey
 
 object EduSdkResolver {
@@ -95,6 +97,7 @@ class EduModelDispatcher internal constructor(
         intent.putExtra(parcelable.toKey(), parcelable)
     }
 
-    fun dispatch(context: Context) = context.sendBroadcast(intent)
+    @RequiresPermission(Constants.PERMISSION_ACCESS_DATA)
+    fun dispatch(context: Context) = context.sendBroadcast(intent, Constants.PERMISSION_ACCESS_DATA)
 
 }
