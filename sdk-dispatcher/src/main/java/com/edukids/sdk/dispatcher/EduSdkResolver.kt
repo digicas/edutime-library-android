@@ -11,6 +11,7 @@ import com.edukids.sdk.dispatcher.EduSdkResolver.toParcelables
 import com.edukids.sdk.model.*
 import com.edukids.sdk.model.internal.EduConstants
 import com.edukids.sdk.model.internal.InstanceKey
+import com.edukids.sdk.model.permission.hasEduPermission
 
 object EduSdkResolver {
 
@@ -98,7 +99,11 @@ class EduModelDispatcher internal constructor(
     }
 
     @RequiresPermission(EduConstants.Permission.ACCESS_DATA)
-    fun dispatch(context: Context) =
+    fun dispatch(context: Context) {
+        if (!context.hasEduPermission()) {
+            throw SecurityException("Communication between SDK and host requires permission (${EduConstants.Permission.ACCESS_DATA})")
+        }
         context.sendBroadcast(intent, EduConstants.Permission.ACCESS_DATA)
+    }
 
 }
