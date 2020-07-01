@@ -20,7 +20,9 @@
             adapter="@{viewModel.adapter}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:fadingEdgeLength="@dimen/l2"
             android:orientation="vertical"
+            android:requiresFadingEdge="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHeight_percent=".5"
@@ -60,6 +62,28 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/main_time_constraints" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/main_currency_stats"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.onCurrencyStatsClicked()}"
+            android:text="Currency Stats"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/main_categories" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/main_skill_level"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.onSkillLevelClicked()}"
+            android:text="Skill Level"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/main_currency_stats" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

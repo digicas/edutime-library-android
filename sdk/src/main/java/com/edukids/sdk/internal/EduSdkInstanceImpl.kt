@@ -48,6 +48,14 @@ internal class EduSdkInstanceImpl(
         return sdk.waitRegistry.runCatching { await<CurrencyStats>() }
     }
 
+    override suspend fun getSkillLevel(): Result<SkillLevel> {
+        scope.launch(dispatcher) {
+            key.dispatch()
+                .put(EduTaskOrder(SkillLevel::class.java))
+                .dispatch(sdk.context!!)
+        }
+        return sdk.waitRegistry.runCatching { await<SkillLevel>() }
+    }
 
     override fun getTimeConstraintsAsync(): Future<TimeConstraints> {
         return scope
@@ -67,6 +75,11 @@ internal class EduSdkInstanceImpl(
             .asFuture()
     }
 
+    override fun getSkillLevelAsync(): Future<SkillLevel> {
+        return scope
+            .async(dispatcher) { getSkillLevel().getOrThrow() }
+            .asFuture()
+    }
 
     override fun suggestCorrectCategory(suggestion: ScreenTimeCategorySuggestion) {
         key.dispatch()

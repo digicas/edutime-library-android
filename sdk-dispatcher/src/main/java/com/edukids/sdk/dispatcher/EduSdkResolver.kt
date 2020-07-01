@@ -80,7 +80,7 @@ class EduModelResolver internal constructor() {
 
     fun resolveInstance() = bundles.asSequence()
         .filter { it.containsKey(EduSdkResolver.KEY_INSTANCE) }
-        .map { it.getParcelable<InstanceKey>(EduSdkResolver.KEY_INSTANCE) }
+        .mapNotNull { it.getParcelable<InstanceKey>(EduSdkResolver.KEY_INSTANCE) }
         .firstOrNull()
 
     fun resolve() = bundles.flatMap { it.toParcelables() }

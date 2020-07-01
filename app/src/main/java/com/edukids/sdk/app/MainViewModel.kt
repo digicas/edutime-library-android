@@ -13,7 +13,6 @@ import com.google.android.material.button.MaterialButton
 import com.skoumal.teanity.list.BindingAdapter
 import com.skoumal.teanity.viewmodel.TeanityViewModel
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import kotlin.random.Random.Default.nextInt
 
 class MainViewModel : TeanityViewModel() {
@@ -34,7 +33,7 @@ class MainViewModel : TeanityViewModel() {
 
     // ---
 
-    private inline fun <reified T> measureResult(body: () -> T): T? {
+    private inline fun <reified T> measureResult(body: () -> T): T {
         adapter.update(adapter.items + TextItem("Started new request…"))
         val start = System.currentTimeMillis()
         return body().also {
@@ -60,7 +59,7 @@ class MainViewModel : TeanityViewModel() {
             pendingMission = if (mission == null) {
                 measureResult { onStartMission(sdk) }.also {
                     button.text = "Finish Mission"
-                }
+                }.getOrNull()
             } else {
                 measureResult { onFinishMission(sdk, mission) }.also {
                     button.text = "Start Mission"
@@ -88,17 +87,31 @@ class MainViewModel : TeanityViewModel() {
         }
     }
 
+    fun onCurrencyStatsClicked() {
+        val sdk = sdk ?: return
+
+        viewModelScope.launch {
+            measureResult { sdk.getCurrencyStats() }
+        }
+    }
+
+    fun onSkillLevelClicked() {
+        val sdk = sdk ?: return
+
+        viewModelScope.launch {
+            measureResult { sdk.getSkillLevel() }
+        }
+    }
+
     // ---
 
-    private suspend fun onStartMission(sdk: EduSdkInstance): EduMissionContract? {
+    private suspend fun onStartMission(sdk: EduSdkInstance): Result<EduMissionContract> {
         val params = EduMissionStartParams(
             isRetry = false,
             skills = listOf("Test skill"),
             eduTaskType = "Special type"
         )
         return sdk.getMission().start(params)
-            .onFailure { Timber.e(it) }
-            .getOrNull()
     }
 
     private fun onFinishMission(sdk: EduSdkInstance, mission: EduMissionContract) {

@@ -1,9 +1,6 @@
 package com.edukids.sdk
 
-import com.edukids.sdk.model.CurrencyStats
-import com.edukids.sdk.model.ScreenTimeCategoryConstraints
-import com.edukids.sdk.model.ScreenTimeCategorySuggestion
-import com.edukids.sdk.model.TimeConstraints
+import com.edukids.sdk.model.*
 import java.util.concurrent.Future
 
 interface EduSdkInstance {
@@ -31,6 +28,16 @@ interface EduSdkInstance {
      * */
     suspend fun getCurrencyStats(): Result<CurrencyStats>
 
+    /**
+     * Request skill level of current user. App should be able to deduce the skill level of the
+     * current user based on the stats provided by the SDK.
+     * It should be however called only at launch time as it can take significant time to respond
+     * and will provide full statistics every time.
+     * This provision of full stats should be beneficial for apps that haven't been launched in a
+     * long time or user completed dozens of exercises since the last launch.
+     * */
+    suspend fun getSkillLevel(): Result<SkillLevel>
+
 
     /** @see [getTimeConstraints] */
     fun getTimeConstraintsAsync(): Future<TimeConstraints>
@@ -40,6 +47,9 @@ interface EduSdkInstance {
 
     /** @see [getCurrencyStats] */
     fun getCurrencyStatsAsync(): Future<CurrencyStats>
+
+    /** @see [getSkillLevel] */
+    fun getSkillLevelAsync(): Future<SkillLevel>
 
 
     /**
