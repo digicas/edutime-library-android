@@ -5,7 +5,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class SkillLevel(
-    val mastered: SkillSet,
-    val inProgress: SkillSet,
-    val failed: SkillSet
+    val firstTry: SkillSet,
+    val retry: SkillSet
 ) : Parcelable

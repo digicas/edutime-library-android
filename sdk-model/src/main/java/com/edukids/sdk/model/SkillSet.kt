@@ -5,8 +5,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class SkillSet(
-    val skill: List<String>,
-    val categories: List<String>,
-    val subcategories: List<String>,
-    val disciplines: List<String>
+    val failed: Map<String, Int>,
+    val succeeded: Map<String, Int>
 ) : Parcelable
