@@ -58,7 +58,9 @@ object EduSdkResolver {
     ) = EduModelDispatcher(target, instanceKey)
 
 
-    internal fun Parcelable.toKey() = this::class.java.toKey()
+    internal fun Parcelable.toKey() =
+        this::class.java.toKey()
+
     internal fun Class<out Parcelable>.toKey() = keys[this]
         ?: error("This parcelable ($this) cannot be resolved to any key. Check the definitions")
 
@@ -98,13 +100,19 @@ class EduModelDispatcher internal constructor(
         intent.putExtra(parcelable.toKey(), parcelable)
     }
 
+    private fun isPermitted(context: Context) =
+        context.hasEduPermission()
+
+    private fun isInstalled(context: Context) =
+        context.packageManager.queryBroadcastReceivers(intent, 0).isNotEmpty()
+
     @RequiresPermission(EduConstants.Permission.ACCESS_DATA)
     @Throws(SecurityException::class, IllegalStateException::class)
     fun dispatch(context: Context) {
-        if (!context.hasEduPermission()) {
+        if (!isPermitted(context)) {
             throw SecurityException("Communication between SDK and host requires permission (${EduConstants.Permission.ACCESS_DATA})")
         }
-        if (context.packageManager.queryBroadcastReceivers(intent, 0).isEmpty()) {
+        if (!isInstalled(context)) {
             throw IllegalStateException("App is not installed")
         }
         context.sendBroadcast(intent, EduConstants.Permission.ACCESS_DATA)
