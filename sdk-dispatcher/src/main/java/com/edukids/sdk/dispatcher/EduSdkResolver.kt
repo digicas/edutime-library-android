@@ -99,9 +99,13 @@ class EduModelDispatcher internal constructor(
     }
 
     @RequiresPermission(EduConstants.Permission.ACCESS_DATA)
+    @Throws(SecurityException::class, IllegalStateException::class)
     fun dispatch(context: Context) {
         if (!context.hasEduPermission()) {
             throw SecurityException("Communication between SDK and host requires permission (${EduConstants.Permission.ACCESS_DATA})")
+        }
+        if (context.packageManager.queryBroadcastReceivers(intent, 0).isEmpty()) {
+            throw IllegalStateException("App is not installed")
         }
         context.sendBroadcast(intent, EduConstants.Permission.ACCESS_DATA)
     }
