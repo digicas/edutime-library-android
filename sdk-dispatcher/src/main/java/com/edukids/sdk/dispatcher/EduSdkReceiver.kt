@@ -25,8 +25,11 @@ abstract class EduSdkReceiver : BroadcastReceiver(), CoroutineScope by MainScope
 
     private fun onReceive(context: Context, extras: Bundle) {
         val resolver = EduSdkResolver.find().inside(extras)
-        // todo goAsync()
-        launch { onReceive(context, resolver.resolve(), resolver.resolveInstance()) }
+        val pendingResult = goAsync()
+        launch {
+            onReceive(context, resolver.resolve(), resolver.resolveInstance())
+            pendingResult.finish()
+        }
     }
 
     open suspend fun onReceive(context: Context, extras: List<Parcelable>, instance: InstanceKey?) {
