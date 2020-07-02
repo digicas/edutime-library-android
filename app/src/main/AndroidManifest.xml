@@ -2,13 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.edukids.sdk.app">
 
-    <queries>
-        <package android:name="com.edukids.launcher" />
-        <intent>
-            <action android:name="com.edukids.sdk.ACTION_CONTACT_DATA_SOURCE" />
-        </intent>
-    </queries>
-
     <application
         android:name=".App"
         android:allowBackup="true"
