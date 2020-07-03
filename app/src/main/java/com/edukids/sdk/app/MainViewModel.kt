@@ -57,9 +57,9 @@ class MainViewModel : TeanityViewModel() {
         viewModelScope.launch {
             val mission = pendingMission
             pendingMission = if (mission == null) {
-                measureResult { onStartMission(sdk) }.also {
+                measureResult { onStartMission(sdk) }.getOrNull()?.also {
                     button.text = "Finish Mission"
-                }.getOrNull()
+                }
             } else {
                 measureResult { onFinishMission(sdk, mission) }.also {
                     button.text = "Start Mission"
