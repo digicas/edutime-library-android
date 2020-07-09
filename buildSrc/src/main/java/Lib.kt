@@ -9,7 +9,7 @@ object Lib {
     object V {
         const val kotlin = "1.3.72"
         const val coroutines = "1.3.7"
-        const val gradle = "4.1.0-beta02"
+        const val gradle = "4.1.0-beta03"
 
         object AndroidX {
             const val recycler = "1.1.0"

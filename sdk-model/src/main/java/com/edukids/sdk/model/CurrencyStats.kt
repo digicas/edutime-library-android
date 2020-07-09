@@ -6,6 +6,5 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class CurrencyStats(
     val currentAmount: Double,
-    val earnedInInstance: Double,
-    val currentlyEarnable: Double
+    val earnedInInstance: Double
 ) : Parcelable
