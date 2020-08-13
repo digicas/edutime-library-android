@@ -4,6 +4,8 @@ plugins {
     id 'maven-publish'
 }
 
+apply from: "../tasks.gradle"
+
 afterEvaluate {
     publishing {
         publications {
@@ -13,6 +15,8 @@ afterEvaluate {
                 groupId = Publishing.groupId
                 artifactId = project.name
                 version = Publishing.version
+
+                artifact androidSourcesJar
             }
         }
     }

@@ -4,6 +4,8 @@ plugins {
     id 'maven-publish'
 }
 
+apply from: "../tasks.gradle"
+
 teanity {
     modules {
         version = Lib.other.teanityModules
@@ -20,6 +22,8 @@ afterEvaluate {
                 groupId = Publishing.groupId
                 artifactId = project.name
                 version = Publishing.version
+
+                artifact androidSourcesJar
             }
         }
     }
