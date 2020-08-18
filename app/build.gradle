@@ -13,7 +13,7 @@ teanity {
 
 android {
     defaultConfig {
-        applicationId "com.edukids.sdk.app"
+        applicationId "cz.edukids.sdk.app"
     }
     buildFeatures {
         dataBinding = true

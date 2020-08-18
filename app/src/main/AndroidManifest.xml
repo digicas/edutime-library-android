@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.edukids.sdk.app">
+    package="cz.edukids.sdk.app">
 
     <application
         android:name=".App"
@@ -16,7 +16,7 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.edukids.LAUNCHER" />
+                <category android:name="cz.edukids.LAUNCHER" />
             </intent-filter>
         </activity>
 

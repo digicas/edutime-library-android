@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.edukids.sdk">
+    package="cz.edukids.sdk">
 
     <queries>
-        <package android:name="com.edukids.launcher" />
+        <package android:name="cz.edukids.launcher" />
         <intent>
-            <action android:name="com.edukids.sdk.ACTION_CONTACT_DATA_SOURCE" />
+            <action android:name="cz.edukids.sdk.ACTION_CONTACT_DATA_SOURCE" />
         </intent>
     </queries>
 
-    <uses-permission android:name="com.edukids.permission.ACCESS_DATA" />
+    <uses-permission android:name="cz.edukids.permission.ACCESS_DATA" />
 
     <application tools:ignore="MissingAutoRevokeTolerance">
 
@@ -21,7 +21,7 @@
             tools:node="merge">
 
             <meta-data
-                android:name="com.edukids.sdk.EduSdkInitializer"
+                android:name="cz.edukids.sdk.EduSdkInitializer"
                 android:value="androidx.startup" />
 
         </provider>
@@ -30,9 +30,9 @@
             android:name=".comms.SdkReceiver"
             android:enabled="true"
             android:exported="true"
-            android:permission="com.edukids.permission.ACCESS_DATA">
+            android:permission="cz.edukids.permission.ACCESS_DATA">
             <intent-filter>
-                <action android:name="com.edukids.sdk.ACTION_RECEIVE_DATA" />
+                <action android:name="cz.edukids.sdk.ACTION_RECEIVE_DATA" />
             </intent-filter>
         </receiver>
 

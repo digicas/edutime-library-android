@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.edukids.sdk.app.MainViewModel" />
+            type="cz.edukids.sdk.app.MainViewModel" />
 
     </data>
 
