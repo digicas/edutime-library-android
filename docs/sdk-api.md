@@ -1,4 +1,4 @@
-# EduSDK
+# EduTimeSdk
 
 Library is initialized automatically via background launch, and so requires no user/developer input whatsoever.
 
@@ -9,13 +9,13 @@ In order to execute any actions you need a instance of the sdk. Instance is init
 ### Definition
 
 ```kotlin
-class EduSdk {
+class EduTimeSdk {
 
-    fun getNewInstance(intent: Intent): EduSdkInstance
+    fun getNewInstance(intent: Intent): EduTimeSdkInstance
 
 }
 
-interface EduSdkInstance {
+interface EduTimeSdkInstance {
 
     /**
      * Requests this app's constraints from the launcher.
@@ -70,20 +70,20 @@ interface EduSdkInstance {
 ### Example
 
 ```kotlin
-lateinit var eduSdk: EduSdkInstance
+lateinit var eduSdk: EduTimeSdkInstance
 
 fun onCreate(/*...*/) {
     //...
-    eduSdk = EduSDK().getNewInstance(intent)
+    eduSdk = EduTimeSdk().getNewInstance(intent)
 }
 ```
 
 ```Java
-private EduSdkInstance eduSdk;
+private EduTimeSdkInstance eduSdk;
 
 fun onCreate(/*...*/) {
     //...
-    eduSdk = EduSDK.getInstance().getNewInstance(intent)
+    eduSdk = EduTimeSdk.getInstance().getNewInstance(intent)
 }
 ```
 
@@ -111,13 +111,13 @@ data class TimeConstraints(
 ### Example
 
 ```kotlin
-suspend fun getTimeConstraints(eduSdk: EduSdkInstance) {
+suspend fun getTimeConstraints(eduSdk: EduTimeSdkInstance) {
     val constraints = eduSdk.getTimeConstraints()
 }
 ```
 
 ```java
-public void getTimeConstraints(EduSdkInstance eduSdk) {
+public void getTimeConstraints(EduTimeSdkInstance eduSdk) {
     Future<TimeConstraints> constraints = eduSdk.getTimeConstraintsAsync()
 }
 ```
@@ -151,13 +151,13 @@ data class ScreenTimeCategoryConstraints(
 ### Example
 
 ```kotlin
-suspend fun getCategoryConstraints(eduSdk: EduSdkInstance) {
+suspend fun getCategoryConstraints(eduSdk: EduTimeSdkInstance) {
     val constraints = eduSdk.getScreenTimeCategoryConstraints()
 }
 ```
 
 ```java
-public void getCategoryConstraints(EduSdkInstance eduSdk) {
+public void getCategoryConstraints(EduTimeSdkInstance eduSdk) {
     Future<CategoryConstraints> constraints = eduSdk.getScreenTimeCategoryConstraintsAsync()
 }
 ```
@@ -202,7 +202,7 @@ suspend fun getCategory(constraints: ScreenTimeCategoryConstraints) {
 
 ## Mission
 
-Allows access to states activities to the EduSDK backend. It provides itself the information needed for making useful statistics and reporting on currency gained through the excercise.
+Allows access to states activities to the EduTimeSdk backend. It provides itself the information needed for making useful statistics and reporting on currency gained through the excercise.
 
 Please note that it has to be called at the very start and very end of the excercise to compute the time it took to complete the task.
 
@@ -313,7 +313,7 @@ data class EduMissionContract(
 ### Example
 
 ```kotlin
-fun startMission(eduSdk: EduSdkInstance) {
+fun startMission(eduSdk: EduTimeSdkInstance) {
     val mission = eduSdk.getMission()
     scope.launch {
         val params = collectStartParams() // async
@@ -323,7 +323,7 @@ fun startMission(eduSdk: EduSdkInstance) {
 ```
 
 ```kotlin
-fun endMission(eduSdk: EduSdkInstance) {
+fun endMission(eduSdk: EduTimeSdkInstance) {
     val mission = eduSdk.getMission()
     scope.launch {
         val params = collectFinishParams() // async
@@ -352,13 +352,13 @@ data class CurrencyStats(
 ### Example One-Shot
 
 ```kotlin
-suspend fun getCurrencyStats(eduSdk: EduSdkInstance) {
+suspend fun getCurrencyStats(eduSdk: EduTimeSdkInstance) {
     val currency = eduSdk.getCurrencyStats()
 }
 ```
 
 ```java
-public void getCurrencyStats(EduSdkInstance eduSdk) {
+public void getCurrencyStats(EduTimeSdkInstance eduSdk) {
     Future<CurrencyStats> currency = eduSdk.getCurrencyStatsAsync()
 }
 ```
@@ -366,7 +366,7 @@ public void getCurrencyStats(EduSdkInstance eduSdk) {
 ### Example Observer
 
 ```kotlin
-fun observeCurrencyStats(eduSdk: EduSdkInstance) {
+fun observeCurrencyStats(eduSdk: EduTimeSdkInstance) {
     eduSdk.observeCurrencyStats().observe(this, Observer {
         it.earnedInInstance // fetch points for this instance
     })
@@ -401,13 +401,13 @@ data class SkillSet(
 ### Example
 
 ```kotlin
-suspend fun getSkillLevel(eduSdk: EduSdkInstance) {
+suspend fun getSkillLevel(eduSdk: EduTimeSdkInstance) {
     val skill = eduSdk.getSkillLevel()
 }
 ```
 
 ```java
-public void getSkillLevel(EduSdkInstance eduSdk) {
+public void getSkillLevel(EduTimeSdkInstance eduSdk) {
     Future<SkillLevel> skill = eduSdk.getSkillLevelAsync()
 }
 ```
