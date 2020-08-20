@@ -8,7 +8,7 @@ import cz.edukids.sdk.dispatcher.EduSdkResolver
 import cz.edukids.sdk.internal.EduSdkInstanceImpl
 import java.lang.ref.WeakReference
 
-class EduSdk private constructor(
+class EduTimeSdk private constructor(
     private val _context: WeakReference<Context>
 ) {
 
@@ -17,7 +17,7 @@ class EduSdk private constructor(
     internal val waitRegistry = SuspendingWaitRegistry()
 
     @Throws(IllegalStateException::class)
-    fun getNewInstance(intent: Intent): EduSdkInstance {
+    fun getNewInstance(intent: Intent): EduTimeSdkInstance {
         val key = EduSdkResolver.find()
             .inside(intent.extras ?: Bundle.EMPTY)
             .resolveInstance()
@@ -31,14 +31,14 @@ class EduSdk private constructor(
 
     companion object {
 
-        private var sdk: WeakReference<EduSdk?>? = null // this WR is prolly unnecessary
+        private var sdk: WeakReference<EduTimeSdk?>? = null // this WR is prolly unnecessary
             set(value) {
                 field?.clear()
                 field = value
             }
 
         operator fun invoke(context: Context) = sdk?.get() ?: let {
-            EduSdk(WeakReference(context.applicationContext)).also {
+            EduTimeSdk(WeakReference(context.applicationContext)).also {
                 sdk = WeakReference(it)
             }
         }

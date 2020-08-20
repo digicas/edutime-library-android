@@ -21,7 +21,7 @@
             tools:node="merge">
 
             <meta-data
-                android:name="cz.edukids.sdk.EduSdkInitializer"
+                android:name="cz.edukids.sdk.EduTimeSdkInitializer"
                 android:value="androidx.startup" />
 
         </provider>

@@ -1,7 +1,7 @@
 package cz.edukids.sdk.internal
 
 import cz.edukids.sdk.EduMission
-import cz.edukids.sdk.EduSdk
+import cz.edukids.sdk.EduTimeSdk
 import cz.edukids.sdk.async.asFuture
 import cz.edukids.sdk.comms.dispatch
 import cz.edukids.sdk.model.EduMissionComplete
@@ -16,7 +16,7 @@ import java.util.concurrent.Future
 
 internal class EduMissionImpl(
     private val key: InstanceKey,
-    private val sdk: EduSdk
+    private val sdk: EduTimeSdk
 ) : EduMission {
 
     private val scope = MainScope()

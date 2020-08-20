@@ -1,8 +1,8 @@
 package cz.edukids.sdk.internal
 
 import cz.edukids.sdk.EduMission
-import cz.edukids.sdk.EduSdk
-import cz.edukids.sdk.EduSdkInstance
+import cz.edukids.sdk.EduTimeSdk
+import cz.edukids.sdk.EduTimeSdkInstance
 import cz.edukids.sdk.async.asFuture
 import cz.edukids.sdk.comms.dispatch
 import cz.edukids.sdk.model.*
@@ -15,8 +15,8 @@ import java.util.concurrent.Future
 
 internal class EduSdkInstanceImpl(
     private val key: InstanceKey,
-    private val sdk: EduSdk
-) : EduSdkInstance {
+    private val sdk: EduTimeSdk
+) : EduTimeSdkInstance {
 
     private val scope = MainScope()
     private val dispatcher = Dispatchers.Default

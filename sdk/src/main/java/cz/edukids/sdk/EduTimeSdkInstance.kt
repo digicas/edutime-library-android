@@ -3,7 +3,7 @@ package cz.edukids.sdk
 import cz.edukids.sdk.model.*
 import java.util.concurrent.Future
 
-interface EduSdkInstance {
+interface EduTimeSdkInstance {
 
     /**
      * Requests this app's constraints from the launcher.

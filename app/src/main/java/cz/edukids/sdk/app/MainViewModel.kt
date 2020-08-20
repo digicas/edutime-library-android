@@ -6,8 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.google.android.material.button.MaterialButton
 import com.skoumal.teanity.list.BindingAdapter
 import com.skoumal.teanity.viewmodel.TeanityViewModel
-import cz.edukids.sdk.EduSdk
-import cz.edukids.sdk.EduSdkInstance
+import cz.edukids.sdk.EduTimeSdk
+import cz.edukids.sdk.EduTimeSdkInstance
 import cz.edukids.sdk.app.recycler.TextItem
 import cz.edukids.sdk.model.EduMissionContract
 import cz.edukids.sdk.model.EduMissionFinishParams
@@ -24,11 +24,11 @@ class MainViewModel : TeanityViewModel() {
     // ---
 
     private var pendingMission: EduMissionContract? = null
-    private var sdk: EduSdkInstance? = null
+    private var sdk: EduTimeSdkInstance? = null
 
     @Throws(IllegalStateException::class)
     fun start(intent: Intent) {
-        sdk = EduSdk().getNewInstance(intent)
+        sdk = EduTimeSdk().getNewInstance(intent)
     }
 
     // ---
@@ -105,7 +105,7 @@ class MainViewModel : TeanityViewModel() {
 
     // ---
 
-    private suspend fun onStartMission(sdk: EduSdkInstance): Result<EduMissionContract> {
+    private suspend fun onStartMission(sdk: EduTimeSdkInstance): Result<EduMissionContract> {
         val params = EduMissionStartParams(
             isRetry = false,
             skills = listOf("Test skill"),
@@ -114,7 +114,7 @@ class MainViewModel : TeanityViewModel() {
         return sdk.getMission().start(params)
     }
 
-    private fun onFinishMission(sdk: EduSdkInstance, mission: EduMissionContract) {
+    private fun onFinishMission(sdk: EduTimeSdkInstance, mission: EduMissionContract) {
         val params = EduMissionFinishParams(
             contractId = mission.id,
             isSuccess = false,
