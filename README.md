@@ -37,22 +37,22 @@ developer.
 
 1) To your **project-level** `build.gradle` add following:
 
-    ```gradle
-    subprojects {
-        repositories {
-            maven { url "https://jitpack.io" }
-        }
+```gradle
+subprojects {
+    repositories {
+        maven { url "https://jitpack.io" }
     }
-    ```
+}
+```
 
 2) To your **module-level** `build.gradle` add following:
 
-    ```gradle
-    dependencies {
-        def edu_version = "" // always check jitpack badge
-        implementation "cz.edukids:sdk:$edu_version"
-    }
-    ```
+```gradle
+dependencies {
+    def edu_version = "" // always check jitpack badge
+    implementation "cz.edukids:sdk:$edu_version"
+}
+```
 
 3) Sync your project and you're good to go
 
@@ -63,40 +63,41 @@ the bleeding edge builds to be ready when the new changes come out, or verify bu
 prompted to by the developers.
 
 1) Clone this repository
+
 2) Run following command in the folder you've just downloaded your repository to:
 
-    * Unix
-        * `./gradlew assemble publishToMavenLocal`
-    * Windows
-        * `gradlew assemble publishToMavenLocal`
+* Unix
+    * `./gradlew assemble publishToMavenLocal`
+* Windows
+    * `gradlew assemble publishToMavenLocal`
 
-    Please make sure you have a JAVA_HOME system environment variable set up, otherwise you will
-    encounter issues. Any support requests for this method are disregarded, as bleeding edge builds
-    cannot be tracked.
+Please make sure you have a JAVA_HOME system environment variable set up, otherwise you will
+encounter issues. Any support requests for this method are disregarded, as bleeding edge builds
+cannot be tracked.
 
-    This command builds and publishes this library's fragment to your local cached maven repository
-    (~/.m2).
+This command builds and publishes this library's fragment to your local cached maven repository
+(~/.m2).
 
 3) To your **module-level** `build.gradle` add following:
 
-    ```gradle
-    dependencies {
-        def edu_version = "" // see below *
-        implementation "cz.edukids:sdk:$edu_version"
-    }
-    ```
+```gradle
+dependencies {
+    def edu_version = "" // see below *
+    implementation "cz.edukids:sdk:$edu_version"
+}
+```
 
-    \* Version can be found in the [Publishing](buildSrc/src/main/java/Publishing.kt) file.
+\* Version can be found in the [Publishing](buildSrc/src/main/java/Publishing.kt) file.
 
 4) To your **project-level** `build.gradle` add following:
 
-    ```gradle
-    subprojects {
-        repositories {
-            mavenLocal()
-        }
+```gradle
+subprojects {
+    repositories {
+        mavenLocal()
     }
-    ```
+}
+```
 
 5) Sync your project and you're good to go
 
