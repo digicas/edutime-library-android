@@ -37,7 +37,7 @@ developer.
 
 1) To your **project-level** `build.gradle` add following:
 
-```gradle
+```groovy
 subprojects {
     repositories {
         maven { url "https://jitpack.io" }
@@ -47,7 +47,7 @@ subprojects {
 
 2) To your **module-level** `build.gradle` add following:
 
-```gradle
+```groovy
 dependencies {
     def edu_version = "" // always check jitpack badge
     implementation "cz.edukids:sdk:$edu_version"
@@ -80,7 +80,7 @@ This command builds and publishes this library's fragment to your local cached m
 
 3) To your **module-level** `build.gradle` add following:
 
-```gradle
+```groovy
 dependencies {
     def edu_version = "" // see below *
     implementation "cz.edukids:sdk:$edu_version"
@@ -91,7 +91,7 @@ dependencies {
 
 4) To your **project-level** `build.gradle` add following:
 
-```gradle
+```groovy
 subprojects {
     repositories {
         mavenLocal()
@@ -100,6 +100,8 @@ subprojects {
 ```
 
 5) Sync your project and you're good to go
+
+---
 
 ## Versioning
 
