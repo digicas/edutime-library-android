@@ -2,9 +2,11 @@ package cz.edukids.sdk.app
 
 import android.content.Intent
 import android.view.View
+import androidx.databinding.Bindable
 import androidx.lifecycle.viewModelScope
 import com.google.android.material.button.MaterialButton
 import com.skoumal.teanity.list.BindingAdapter
+import com.skoumal.teanity.observable.observable
 import com.skoumal.teanity.viewmodel.TeanityViewModel
 import cz.edukids.sdk.EduTimeSdk
 import cz.edukids.sdk.EduTimeSdkInstance
@@ -17,6 +19,8 @@ import kotlin.random.Random.Default.nextInt
 
 class MainViewModel : TeanityViewModel() {
 
+    var isSDKAvailable by observable(false, BR.sDKAvailable)
+        @Bindable get
     val adapter = BindingAdapter<TextItem> {
         it.setVariable(BR.viewModel, this)
     }
@@ -28,7 +32,9 @@ class MainViewModel : TeanityViewModel() {
 
     @Throws(IllegalStateException::class)
     fun start(intent: Intent) {
-        sdk = EduTimeSdk().getNewInstance(intent)
+        isSDKAvailable = EduTimeSdk().runCatching { getNewInstance(intent) }
+            .onSuccess { sdk = it }
+            .fold({ true }, { false })
     }
 
     // ---

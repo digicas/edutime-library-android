@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">edukids-sdk</string>
+    <string name="app_name">EduKids SDK Dummy</string>
+    <string name="app_name_edu">Coin Generator</string>
 </resources>
