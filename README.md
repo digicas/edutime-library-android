@@ -8,7 +8,7 @@ Requirements on information exchange is in docs [information-exhange](docs/infor
 
 ## API Reference
 
-You can always refer to code packaged with your .poms, however you can refer to somewhat up-to-date
+You can always refer to code packaged with provided .poms, however you can refer to somewhat up-to-date
 [API](docs/sdk-api.md). Further changes will be documented in-code and the aforementioned API will
 not be updated any more.
 
