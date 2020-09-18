@@ -8,7 +8,7 @@ import cz.edukids.sdk.model.permission.hasEduPermission
 import cz.edukids.sdk.model.permission.requestEduPermission
 import timber.log.Timber
 
-class MainActivity : TeanityActivity<MainViewModel, ActivityMainBinding>() {
+class MainActivity : TeanityActivity<ActivityMainBinding>() {
 
     override val layoutRes = R.layout.activity_main
     override val viewModel: MainViewModel by viewModels()

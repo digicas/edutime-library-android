@@ -28,4 +28,8 @@ dependencies {
 
     compileOnly(Lib.android.activity)
 
+    implementation(Lib.kotlin.stdlib)
+    implementation(Lib.kotlin.coroutines)
+    implementation(Lib.kotlin.reflect)
+
 }

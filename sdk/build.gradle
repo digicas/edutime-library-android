@@ -38,4 +38,8 @@ dependencies {
     implementation(Lib.android.startup)
     implementation(Lib.android.core)
 
+    implementation(Lib.kotlin.stdlib)
+    implementation(Lib.kotlin.coroutines)
+    implementation(Lib.kotlin.reflect)
+
 }

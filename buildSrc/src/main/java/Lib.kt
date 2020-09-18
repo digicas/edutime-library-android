@@ -7,8 +7,8 @@ object Lib {
     //endregion
 
     object V {
-        const val kotlin = "1.3.72"
-        const val coroutines = "1.3.8"
+        const val kotlin = "1.4.10"
+        const val coroutines = "1.3.9"
         const val gradle = "4.1.0-rc03"
 
         object AndroidX {
@@ -17,12 +17,13 @@ object Lib {
             const val core = "1.5.0-alpha01"
         }
 
-        const val teanity = "1.2.0-alpha01"
+        const val teanity = "1.2.0-alpha07"
     }
 
     object Kotlin {
         const val gradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:${V.kotlin}"
-        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${V.kotlin}"
+        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${V.kotlin}"
+        const val reflect = "org.jetbrains.kotlin:kotlin-reflect:${V.kotlin}"
         const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${V.coroutines}"
     }
 
@@ -34,7 +35,7 @@ object Lib {
     }
 
     object Other {
-        const val teanity = "com.skoumal:teanity-plugin:1.0.8"
+        const val teanity = "com.skoumal:teanity-plugin:2.0.0-alpha01"
         const val teanityModules = V.teanity
     }
 
