@@ -7,7 +7,7 @@ object Lib {
     //endregion
 
     object V {
-        const val kotlin = "1.4.10"
+        const val kotlin = "1.4.20-M1-54"
         const val coroutines = "1.3.9"
         const val gradle = "4.1.0-rc03"
 
@@ -22,7 +22,7 @@ object Lib {
 
     object Kotlin {
         const val gradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:${V.kotlin}"
-        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${V.kotlin}"
+        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${V.kotlin}"
         const val reflect = "org.jetbrains.kotlin:kotlin-reflect:${V.kotlin}"
         const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${V.coroutines}"
     }

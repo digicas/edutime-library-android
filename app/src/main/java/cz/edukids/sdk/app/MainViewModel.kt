@@ -15,6 +15,7 @@ import cz.edukids.sdk.model.EduMissionContract
 import cz.edukids.sdk.model.EduMissionFinishParams
 import cz.edukids.sdk.model.EduMissionStartParams
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import kotlin.random.Random.Default.nextInt
 
 class MainViewModel : TeanityViewModel() {
@@ -81,7 +82,10 @@ class MainViewModel : TeanityViewModel() {
         val sdk = sdk ?: return
 
         viewModelScope.launch {
-            measureResult { sdk.getTimeConstraints() }
+            val result = measureResult {
+                sdk.getTimeConstraints()
+            }
+            Timber.v(result.toString())
         }
     }
 
@@ -89,7 +93,10 @@ class MainViewModel : TeanityViewModel() {
         val sdk = sdk ?: return
 
         viewModelScope.launch {
-            measureResult { sdk.getScreenTimeCategoryConstraints() }
+            val result = measureResult {
+                sdk.getScreenTimeCategoryConstraints()
+            }
+            Timber.v(result.toString())
         }
     }
 
@@ -97,7 +104,10 @@ class MainViewModel : TeanityViewModel() {
         val sdk = sdk ?: return
 
         viewModelScope.launch {
-            measureResult { sdk.getCurrencyStats() }
+            val result = measureResult {
+                sdk.getCurrencyStats()
+            }
+            Timber.v(result.toString())
         }
     }
 
@@ -105,7 +115,10 @@ class MainViewModel : TeanityViewModel() {
         val sdk = sdk ?: return
 
         viewModelScope.launch {
-            measureResult { sdk.getSkillLevel() }
+            val result = measureResult {
+                sdk.getSkillLevel()
+            }
+            Timber.v(result.toString())
         }
     }
 
