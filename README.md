@@ -32,6 +32,8 @@ Generally there are two ways to get the library to your project. Local and Remot
 
 ### Remote
 
+[![](https://jitpack.io/v/cz.edukids/edutime-library-android.svg)](https://jitpack.io/#cz.edukids/edutime-library-android)
+
 **Recommended approach**. This ensures you're only using tested builds marked as stable by the
 developer.
 
@@ -50,7 +52,7 @@ subprojects {
 ```groovy
 dependencies {
     def edu_version = "" // always check jitpack badge
-    implementation "cz.edukids:sdk:$edu_version"
+    implementation "cz.edukids.edutime-library-android:sdk:$edu_version"
 }
 ```
 
@@ -82,12 +84,9 @@ This command builds and publishes this library's fragment to your local cached m
 
 ```groovy
 dependencies {
-    def edu_version = "" // see below *
-    implementation "cz.edukids:sdk:$edu_version"
+    implementation "cz.edukids.edutime-library-android:sdk:internal-test-only"
 }
 ```
-
-\* Version can be found in the [Publishing](buildSrc/src/main/java/Publishing.kt) file.
 
 4) To your **project-level** `build.gradle` add following:
 
