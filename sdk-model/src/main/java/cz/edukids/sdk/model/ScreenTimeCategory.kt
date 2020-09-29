@@ -17,8 +17,9 @@ data class ScreenTimeCategory(
 
     /**
      * Ids are normalized and unique
+     * @see [TimeCategory]
      * */
-    val id: String,
+    val id: TimeCategory,
 
     val name: String
 ) : Parcelable
