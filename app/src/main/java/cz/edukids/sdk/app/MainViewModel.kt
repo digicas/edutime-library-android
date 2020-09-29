@@ -94,7 +94,7 @@ class MainViewModel : TeanityViewModel() {
 
         viewModelScope.launch {
             val result = measureResult {
-                sdk.getScreenTimeCategoryConstraints()
+                sdk.getScreenTimeCategoryInfo()
             }
             Timber.v(result.toString())
         }

@@ -18,7 +18,7 @@ interface EduTimeSdkInstance {
      * its time yet, or suggest category changes based on
      * [ScreenTimeCategoryInfo.assignedCategory].
      * */
-    suspend fun getScreenTimeCategoryConstraints(): Result<ScreenTimeCategoryInfo>
+    suspend fun getScreenTimeCategoryInfo(): Result<ScreenTimeCategoryInfo>
 
     /**
      * Requests current currency stats. App can suggest to the user that no more TimeCoins will be
@@ -42,8 +42,8 @@ interface EduTimeSdkInstance {
     /** @see [getTimeConstraints] */
     fun getTimeConstraintsAsync(): Future<TimeConstraints>
 
-    /** @see [getScreenTimeCategoryConstraints] */
-    fun getScreenTimeCategoryConstraintsAsync(): Future<ScreenTimeCategoryInfo>
+    /** @see [getScreenTimeCategoryInfo] */
+    fun getScreenTimeCategoryInfoAsync(): Future<ScreenTimeCategoryInfo>
 
     /** @see [getCurrencyStats] */
     fun getCurrencyStatsAsync(): Future<CurrencyStats>
