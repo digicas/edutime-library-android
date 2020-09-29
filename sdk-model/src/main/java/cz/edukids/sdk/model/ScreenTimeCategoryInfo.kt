@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class ScreenTimeCategoryConstraints(
+data class ScreenTimeCategoryInfo(
     /**
      * Category currently assigned to this time period
      * */

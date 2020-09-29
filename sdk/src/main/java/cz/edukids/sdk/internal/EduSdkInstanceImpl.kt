@@ -30,13 +30,13 @@ internal class EduSdkInstanceImpl(
         return sdk.waitRegistry.runCatching { await<TimeConstraints>() }
     }
 
-    override suspend fun getScreenTimeCategoryConstraints(): Result<ScreenTimeCategoryConstraints> {
+    override suspend fun getScreenTimeCategoryConstraints(): Result<ScreenTimeCategoryInfo> {
         scope.launch(dispatcher) {
             key.dispatch()
-                .put(EduTaskOrder(ScreenTimeCategoryConstraints::class.java))
+                .put(EduTaskOrder(ScreenTimeCategoryInfo::class.java))
                 .dispatch(sdk.context!!)
         }
-        return sdk.waitRegistry.runCatching { await<ScreenTimeCategoryConstraints>() }
+        return sdk.waitRegistry.runCatching { await<ScreenTimeCategoryInfo>() }
     }
 
     override suspend fun getCurrencyStats(): Result<CurrencyStats> {
@@ -63,7 +63,7 @@ internal class EduSdkInstanceImpl(
             .asFuture()
     }
 
-    override fun getScreenTimeCategoryConstraintsAsync(): Future<ScreenTimeCategoryConstraints> {
+    override fun getScreenTimeCategoryConstraintsAsync(): Future<ScreenTimeCategoryInfo> {
         return scope
             .async(dispatcher) { getScreenTimeCategoryConstraints().getOrThrow() }
             .asFuture()

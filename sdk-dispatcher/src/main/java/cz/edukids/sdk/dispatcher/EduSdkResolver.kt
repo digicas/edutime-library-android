@@ -38,7 +38,7 @@ object EduSdkResolver {
         EduMissionContract::class.java to KEY_MISSION_CONTRACT,
         EduMissionComplete::class.java to KEY_MISSION_COMPLETE,
         ScreenTimeCategory::class.java to KEY_CATEGORY,
-        ScreenTimeCategoryConstraints::class.java to KEY_CATEGORY_CONSTRAINTS,
+        ScreenTimeCategoryInfo::class.java to KEY_CATEGORY_CONSTRAINTS,
         ScreenTimeCategorySuggestion::class.java to KEY_CATEGORY_SUGGESTION,
         SkillLevel::class.java to KEY_SKILL_LEVEL,
         TimeConstraints::class.java to KEY_TIME_CONSTRAINTS,
