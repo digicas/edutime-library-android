@@ -7,10 +7,7 @@ import cz.edukids.sdk.async.asFuture
 import cz.edukids.sdk.comms.dispatch
 import cz.edukids.sdk.model.*
 import cz.edukids.sdk.model.internal.InstanceKey
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.util.concurrent.Future
 
 internal class EduSdkInstanceImpl(
@@ -22,39 +19,39 @@ internal class EduSdkInstanceImpl(
     private val dispatcher = Dispatchers.Default
 
     override suspend fun getTimeConstraints(): Result<TimeConstraints> {
-        scope.launch(dispatcher) {
+        withContext(dispatcher) {
             key.dispatch()
                 .put(EduTaskOrder(TimeConstraints::class.java))
                 .dispatch(sdk.context!!)
         }
-        return sdk.waitRegistry.runCatching { await<TimeConstraints>() }
+        return sdk.waitRegistry.runCatching { await() }
     }
 
     override suspend fun getScreenTimeCategoryInfo(): Result<ScreenTimeCategoryInfo> {
-        scope.launch(dispatcher) {
+        withContext(dispatcher) {
             key.dispatch()
                 .put(EduTaskOrder(ScreenTimeCategoryInfo::class.java))
                 .dispatch(sdk.context!!)
         }
-        return sdk.waitRegistry.runCatching { await<ScreenTimeCategoryInfo>() }
+        return sdk.waitRegistry.runCatching { await() }
     }
 
     override suspend fun getCurrencyStats(): Result<CurrencyStats> {
-        scope.launch(dispatcher) {
+        withContext(dispatcher) {
             key.dispatch()
                 .put(EduTaskOrder(CurrencyStats::class.java))
                 .dispatch(sdk.context!!)
         }
-        return sdk.waitRegistry.runCatching { await<CurrencyStats>() }
+        return sdk.waitRegistry.runCatching { await() }
     }
 
     override suspend fun getSkillLevel(): Result<SkillLevel> {
-        scope.launch(dispatcher) {
+        withContext(dispatcher) {
             key.dispatch()
                 .put(EduTaskOrder(SkillLevel::class.java))
                 .dispatch(sdk.context!!)
         }
-        return sdk.waitRegistry.runCatching { await<SkillLevel>() }
+        return sdk.waitRegistry.runCatching { await() }
     }
 
     override fun getTimeConstraintsAsync(): Future<TimeConstraints> {
@@ -82,9 +79,11 @@ internal class EduSdkInstanceImpl(
     }
 
     override fun suggestCorrectCategory(suggestion: ScreenTimeCategorySuggestion) {
-        key.dispatch()
-            .put(suggestion)
-            .dispatch(sdk.context!!)
+        scope.launch(dispatcher) {
+            key.dispatch()
+                .put(suggestion)
+                .dispatch(sdk.context!!)
+        }
     }
 
     override fun getMission(): EduMission {

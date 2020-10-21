@@ -9,9 +9,7 @@ import cz.edukids.sdk.model.EduMissionContract
 import cz.edukids.sdk.model.EduMissionFinishParams
 import cz.edukids.sdk.model.EduMissionStartParams
 import cz.edukids.sdk.model.internal.InstanceKey
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.async
+import kotlinx.coroutines.*
 import java.util.concurrent.Future
 
 internal class EduMissionImpl(
@@ -23,16 +21,20 @@ internal class EduMissionImpl(
     private val dispatcher = Dispatchers.Default
 
     override suspend fun start(params: EduMissionStartParams): Result<EduMissionContract> {
-        key.dispatch()
-            .put(params)
-            .dispatch(sdk.context!!)
-        return sdk.waitRegistry.runCatching { await<EduMissionContract>() }
+        withContext(dispatcher) {
+            key.dispatch()
+                .put(params)
+                .dispatch(sdk.context!!)
+        }
+        return sdk.waitRegistry.runCatching { await() }
     }
 
     override fun finish(params: EduMissionFinishParams) {
-        key.dispatch()
-            .put(params)
-            .dispatch(sdk.context!!)
+        scope.launch(dispatcher) {
+            key.dispatch()
+                .put(params)
+                .dispatch(sdk.context!!)
+        }
     }
 
     override fun startAsync(params: EduMissionStartParams): Future<EduMissionContract> {
@@ -42,9 +44,11 @@ internal class EduMissionImpl(
     }
 
     override fun complete() {
-        key.dispatch()
-            .put(EduMissionComplete)
-            .dispatch(sdk.context!!)
+        scope.launch(dispatcher) {
+            key.dispatch()
+                .put(EduMissionComplete)
+                .dispatch(sdk.context!!)
+        }
     }
 
 }
