@@ -31,7 +31,7 @@ class EduTimeSdk private constructor(
 
     companion object {
 
-        private var sdk: WeakReference<EduTimeSdk?>? = null // this WR is prolly unnecessary
+        private var sdk: WeakReference<EduTimeSdk?>? = null
             set(value) {
                 field?.clear()
                 field = value

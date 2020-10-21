@@ -1,17 +1,10 @@
 package cz.edukids.sdk.dispatcher
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
-import androidx.annotation.RequiresPermission
-import cz.edukids.sdk.dispatcher.EduSdkResolver.apply
-import cz.edukids.sdk.dispatcher.EduSdkResolver.toKey
-import cz.edukids.sdk.dispatcher.EduSdkResolver.toParcelables
 import cz.edukids.sdk.model.*
-import cz.edukids.sdk.model.internal.EduConstants
 import cz.edukids.sdk.model.internal.InstanceKey
-import cz.edukids.sdk.model.permission.hasEduPermission
 
 object EduSdkResolver {
 
@@ -67,55 +60,7 @@ object EduSdkResolver {
     internal fun Bundle.toParcelables() = keys.values
         .asSequence()
         .filter { containsKey(it) }
-        .mapNotNull { getParcelable<Parcelable>(it) }
+        .mapNotNull { getParcelable(it) }
         .toList()
-
-}
-
-class EduModelResolver internal constructor() {
-
-    private val bundles = mutableListOf<Bundle>()
-
-    fun inside(extras: Bundle) = apply {
-        bundles.add(extras)
-    }
-
-    fun resolveInstance() = bundles.asSequence()
-        .filter { it.containsKey(EduSdkResolver.KEY_INSTANCE) }
-        .mapNotNull { it.getParcelable<InstanceKey>(EduSdkResolver.KEY_INSTANCE) }
-        .firstOrNull()
-
-    fun resolve() = bundles.flatMap { it.toParcelables() }
-
-}
-
-class EduModelDispatcher internal constructor(
-    target: EduTarget,
-    instanceKey: InstanceKey? = null
-) {
-
-    private val intent = target.toIntent().apply(instanceKey)
-
-    fun put(parcelable: Parcelable) = apply {
-        intent.putExtra(parcelable.toKey(), parcelable)
-    }
-
-    private fun isPermitted(context: Context) =
-        context.hasEduPermission()
-
-    private fun isInstalled(context: Context) =
-        context.packageManager.queryBroadcastReceivers(intent, 0).isNotEmpty()
-
-    @RequiresPermission(EduConstants.Permission.ACCESS_DATA)
-    @Throws(SecurityException::class, IllegalStateException::class)
-    fun dispatch(context: Context) {
-        if (!isPermitted(context)) {
-            throw SecurityException("Communication between SDK and host requires permission (${EduConstants.Permission.ACCESS_DATA})")
-        }
-        if (!isInstalled(context)) {
-            throw IllegalStateException("App is not installed")
-        }
-        context.sendBroadcast(intent, EduConstants.Permission.ACCESS_DATA)
-    }
 
 }
